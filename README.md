@@ -132,8 +132,8 @@ Cílem bylo vytvořit Q-Learning model, kdy agent hledá sýr a minimalizovat ur
 
 NOTE: Modrá barva představuje aktuální pozici agenta v mřížce, červenou jsou označeny díry a zelená je cílová pozice
 
-![image](https://github.com/user-attachments/assets/d9fd0382-aa8d-4923-b52a-a1b9599ae320)
-![image](https://github.com/user-attachments/assets/63af6db1-cc83-4f3b-b447-1a0094c755a0)
+<img src="https://github.com/user-attachments/assets/d9fd0382-aa8d-4923-b52a-a1b9599ae320" width="400" />
+<img src="https://github.com/user-attachments/assets/63af6db1-cc83-4f3b-b447-1a0094c755a0" width="400" />
 
 
 
