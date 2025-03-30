@@ -105,6 +105,38 @@ Problémy nicméně byly, pokud jsem chtěl opravovat např. čísla 5 a 3, jeli
 Task 4 - Q-learning and the game Find the cheese
 -----------------------------------------
 
+Cílem bylo vytvořit Q-Learning model, kdy agent hledá sýr a minimalizovat uraženou vzdálenost bez toho, aby vstoupil do díry
+- Workflow:
+    - Inicializace
+        - vytváří se matice, která je inicializovaná na 0 - tato matice má na každé pozici [X,Y] 4 hodnoty - jedna hodnota pro každý pohyb
+        - vytváří se díry na náhodných pozicích kromě počáteční a konečné
+
+    - Trénink modelu
+        - trénování probíhá v N epizodách, na začátku každé epizody se nastaví počáteční "defaultní" hodnoty např. pro aktuální pozici
+        - epizoda probíhá do té doby, dokud nenarazíme na cíl - sýr nebo nevstoupíme do díry
+            - v každé epizodě se určí možné kroky, které mohou na dané pozici nastat
+            - je zde šance, že se vybere náhodný krok (epsilon) nebo krok, který má největší Q-hodnotu v matici (na aktuální pozici)
+            - po vybrání kroku se vypočítá na jaké pozici se momentálně agent nachází
+            - následuje výpočet odměny (obsahuje i malou penalizaci za pohyb)
+            - následně dochází k aktualizaci matice a změny aktuální pozice
+    - Zobrazení výsledků
+        - výsledky tréninku se vykreslí v animaci (defaulně se zobrazuje jen poslední úspěšná epizoda)
+
+ Tento Q-learning jsem trénoval ve třech "nastaveních" - 5, 10 a 100 epizod na 5x5 matici (mřížce) se třemi dírami
+ 
+   -> 5 epizod nebylo dostatečných, agent v každé z nich vstoupil do díry.
+   
+   -> Při 10 epizodách již vidíme, že se agent ve 13 krocích dostal k cíli
+   
+   -> Při 100 již agent dosáhl nejkratší možné cesty k sýru (výsledku).
+
+NOTE: Modrá barva představuje aktuální pozici agenta v mřížce, červenou jsou označeny díry a zelená je cílová pozice
+
+![image](https://github.com/user-attachments/assets/d9fd0382-aa8d-4923-b52a-a1b9599ae320)
+![image](https://github.com/user-attachments/assets/63af6db1-cc83-4f3b-b447-1a0094c755a0)
+
+
+
 Task 5 - Pole-balancing problem
 -----------------------------------------
 Task 6 - L-systems
