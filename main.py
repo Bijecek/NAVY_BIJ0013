@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -5,6 +7,8 @@ from task_1 import Perceptron
 from task_2 import MultiLayerPerceptron
 from task_3 import HopfieldNetwork
 from task_4 import QLearning
+from task_6 import LSystem
+from task_7 import IFS
 
 
 def choose_task():
@@ -22,6 +26,10 @@ def choose_task():
                 run_task_3()
             case "4":
                 run_task_4()
+            case "6":
+                run_task_6()
+            case "7":
+                run_task_7()
             case _:
                 print("Invalid choice")
         choice = input("Type \"q\" to quit or Choose a task (number): ")
@@ -114,6 +122,41 @@ def run_task_4():
     history = ql.train()
     ql.replay_training(history, True)
 
+def run_task_6():
+    # 1
+    lsystem = LSystem(axiom="F+F+F+F",rule="F+F-F-FF+F+F-F",angle=90, num_of_nesting=3)
+    lsystem.compute()
+    lsystem.perform_instructions()
+    lsystem.visualize()
+
+    # 2
+    lsystem = LSystem(axiom="F++F++F", rule="F+F--F+F", angle=60, num_of_nesting=3)
+    lsystem.compute()
+    lsystem.perform_instructions()
+    lsystem.visualize()
+
+    # 3
+    # PI/7 radians to degrees = 25.714
+    lsystem = LSystem(axiom="F", rule="F[+F]F[-F]F", angle=25.714, num_of_nesting=3)
+    lsystem.compute()
+    lsystem.perform_instructions()
+    lsystem.visualize()
+
+    # 4
+    # PI/8 radians to degrees = 22.5
+    lsystem = LSystem(axiom="F", rule="FF+[+F-F-F]-[-F+F+F]", angle=22.5, num_of_nesting=3)
+    lsystem.compute()
+    lsystem.perform_instructions()
+    lsystem.visualize()
+
+def run_task_7():
+    ifs = IFS(model_no=1)
+    ifs.compute_transformations()
+    ifs.visualize()
+
+    ifs = IFS(model_no=2)
+    ifs.compute_transformations()
+    ifs.visualize()
 
 if __name__ == "__main__":
     choose_task()
