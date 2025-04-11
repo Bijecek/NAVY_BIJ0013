@@ -141,6 +141,48 @@ Task 5 - Pole-balancing problem
 -----------------------------------------
 Task 6 - L-systems
 -----------------------------------------
+
+Cílem bylo vytvořit Lindenmayer system, ve kterém budeme moct specifikovat axiom, pravidlo a úhel. Jako výsledek dostaneme jednodušší i složitější obrazce skládající se z jednotlivých úseček.
+- Workflow:
+    - Inicializace
+        - nutno zadat axiom, pravidlo a úhel otočení
+        - pro složitější obrazce se také používá "nesting" - tzn. jakési řetězení axiomů (zadává se jako celočíselné číslo)
+
+    - Transformace axiomu a pravidla
+        - jako první procházíme každý znak v axiomu
+            -  pokud narazíme na znak pravidla ('F'), přidáváme do pole instrukcí dané pravidlo (pravidlo nahrazení např. F -> F+F-F)
+            -  pokud narazíme na jakýkoliv jiný znak ( + , - , ] , [ ), pouze jej přidáme do pole instrukcí
+        - v těchto transformacích se také pracuje s "nestingem"
+            - tzn. pokud máme zadán více než 1 nesting, tak se po první iteraci prochází každý znak né v axiomu, ale v předchozím poli instrukcí
+                - obdobně pro každou další iteraci nestingu
+        - výsledkem je tedy pole instrukcí
+
+    - Vykonávání instrukcí
+        - na začátku se inicializuje aktuální pozice X, Y a směr (směr je defaultně nastaven jako "0" -> tzn pohyb po ose X o +1)
+        - následně se prochází každá instrukce:
+            - 'F'
+                - u této instrukce se provede převod stupňů na radiány (z důvodu konvence)
+                - následně se vypočítá posun na ose X v daném směru pomocí funkce math.cos
+                - obdobně se vypočítá posun na ose Y v daném směru pomocí math.sin
+                - ke každému posunu se přičtou jejich aktuální X a Y pozice -> získáváme tedy new_X a new_Y
+                - pozice se aktualizuje a data se uloží pro vizualizaci
+            - '+'
+                - tato instrukce nám říká o kolik se směr má posunout (po směru hodinových ručiček)
+            - '-'
+                - tato instrukce nám říká o kolik se směr má posunout (proti směru hodinových ručiček)
+            - '['
+                - tato operace nám na zásobník uloží aktuální pozici X, Y a aktuální směr
+            - ']'
+                - tato operace získá uloženou pozici X, Y a uložený směr z vrcholu zásobníku 
+ 
+ Ve výsledných vizualizacích můžeme vidět, jak i poměrně jednoduchý axiom, pravidlo, úhel a počet větvení může vytvářet zajímavé obrazce.
+
+<img src="https://github.com/user-attachments/assets/81ad149c-59fa-4e2a-81df-57c0cc74e38f" width="400" height="300" />
+<img src="https://github.com/user-attachments/assets/1971e9fd-f542-490c-8fbe-ce9056c9b0df" width="400" height="300"/>
+<img src="https://github.com/user-attachments/assets/f4e5fb76-160c-4841-9301-3333bdc737bc" width="400" height="300"/>
+<img src="https://github.com/user-attachments/assets/b3e8a59b-b5fa-4772-a9a0-07df33fb151f" width="400" height="300"/>
+
+
 Task 7 - IFS
 -----------------------------------------
 Task 8 - TEA - Mandelbrot set or Julia's set
