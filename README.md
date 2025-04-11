@@ -167,9 +167,9 @@ Cílem bylo vytvořit Lindenmayer system, ve kterém budeme moct specifikovat ax
                 - ke každému posunu se přičtou jejich aktuální X a Y pozice -> získáváme tedy new_X a new_Y
                 - pozice se aktualizuje a data se uloží pro vizualizaci
             - '+'
-                - tato instrukce nám říká o kolik se směr má posunout (po směru hodinových ručiček)
+                - tato instrukce nám říká, že se směr má posunout (po směru hodinových ručiček) o hodnotu úhlu otočení
             - '-'
-                - tato instrukce nám říká o kolik se směr má posunout (proti směru hodinových ručiček)
+                - tato instrukce nám říká, že se směr má posunout (proti směru hodinových ručiček) o hodnotu úhlu otočení
             - '['
                 - tato operace nám na zásobník uloží aktuální pozici X, Y a aktuální směr
             - ']'
@@ -185,6 +185,31 @@ Cílem bylo vytvořit Lindenmayer system, ve kterém budeme moct specifikovat ax
 
 Task 7 - IFS
 -----------------------------------------
+
+Cílem bylo vytvořit 3D fraktály pomocí IFS s využitím náhodně aplikovaných afinních transformací (25% šance)
+- Workflow:
+    - Inicializace
+        - vybere se jeden ze dvou modelů, každý model obsahuje odlišné hodnoty transformací
+
+    - Výpočet transformací
+        - v každé iteraci se prochází všechny řádky transformační matice
+        - každý řádek má 25% šanci, že se pro něj aplikuje příslušná affinní transformace (transformace se aplikuje pro body X, Y a Z)
+            - affinní transformace je dána tímto předpisem, obdobně přepsáno v kódu
+            <img src="https://github.com/user-attachments/assets/ec3c79fc-be7f-4e7c-9635-49bab9a6fd20" width="600" height="300" />
+            <img src="https://github.com/user-attachments/assets/e687100a-f756-4cb6-8709-0823260574dd" width="600" height="300" />
+        - po aplikaci dané affinní transformace se hodnoty X, Y a Z uloží pro vizualizaci
+            - na tyto upravené hodnoty (X, Y, Z) navazují další transformace 
+
+    - Vizualizace
+ 
+ Ve výsledných vizualizacích můžeme vidět výsledky pro jednotlivé transformační modely při 100 000 iteracích.
+ Jsou to tedy fraktály, které vznikly pomocí jednoduchých transformací - nicméně mají přesto poměrně složitou strukturu.
+
+<img src="https://github.com/user-attachments/assets/570d4d2e-ca34-4ae6-9602-8ced96bd89c9" width="400" height="300" />
+<img src="https://github.com/user-attachments/assets/01a8ce2b-f2ea-4a0f-9566-5c2765cbfbf6" width="400" height="300"/>
+
+
+
 Task 8 - TEA - Mandelbrot set or Julia's set
 -----------------------------------------
 Task 9 - Generation of 2D country using fractal geometry
