@@ -9,6 +9,8 @@ from task_3 import HopfieldNetwork
 from task_4 import QLearning
 from task_6 import LSystem
 from task_7 import IFS
+from task_8 import TEA
+from task_9 import CountryGeneration
 
 
 def choose_task():
@@ -30,6 +32,10 @@ def choose_task():
                 run_task_6()
             case "7":
                 run_task_7()
+            case "8":
+                run_task_8()
+            case "9":
+                run_task_9()
             case _:
                 print("Invalid choice")
         choice = input("Type \"q\" to quit or Choose a task (number): ")
@@ -157,6 +163,30 @@ def run_task_7():
     ifs = IFS(model_no=2)
     ifs.compute_transformations()
     ifs.visualize()
+
+def run_task_8():
+    julia_set = TEA( constant=complex(-0.75, 0.10), n_of_iter=300)
+    julia_set.compute_julia_set()
+    julia_set.print_results()
+
+    julia_set = TEA( constant=complex(-0.1, 0.65),n_of_iter= 300)
+    julia_set.compute_julia_set()
+    julia_set.print_results()
+
+def run_task_9():
+    country_gen = CountryGeneration(init_start_pos=(-500,400), init_end_pos=(500,100), y_offset=10, n_of_iterations=15, color="green")
+    country_gen.generate_landscape()
+
+    country_gen.change_settings(init_start_pos=(-500, 150), init_end_pos=(500, 250), y_offset=50, n_of_iterations=5, color="grey")
+    country_gen.generate_landscape()
+
+    country_gen.change_settings(init_start_pos=(-500, 50), init_end_pos=(500, -350), y_offset=50, n_of_iterations=2, color="blue")
+    country_gen.generate_landscape()
+
+    country_gen.show_result()
+
+
+
 
 if __name__ == "__main__":
     choose_task()
