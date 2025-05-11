@@ -287,5 +287,29 @@ Inicializační parametry jednotlivých částí krajin jsou popsány na obrázk
 
 Task 10 - Theory of chaos: Logistic map, chaotic numbers and their prediction
 -----------------------------------------
+
+Cílem bylo prozkoumat chování logistické mapy v závislosti na parametru a a následně se pokusit naučit neuronovou síť předpovídat body bifurkačního diagramu
+
+- Workflow:
+    - Inicializace parametrů
+        - vygeneruje se lineární vektor a_values zadaný mezi start a stop s num body
+        - nastaví se počet iterací logistické mapy
+        - pole x se inicializuje na malé počáteční hodnoty (1e-5)
+    - Výpočet logistické mapy
+        - v každé iteraci se vypočítá nová hodnota x pomocí vzorce **x = a_values * x * (1 - x)**
+        - dle toho, jak je nastavený parametr last, se ukládají kopie aktuálních a_values a x pro pozdější vykreslení bifurkačního diagramu
+    - Trénování pomocí NN
+        - generuje se 10_000 náhodných vzorků pro a_train, x_train a y_train
+            - z těchto vzorků se následně tvoří X_train a y_train data pro vstup do NN
+        - síť obsahuje 2 vrstvy s 64 neurony
+    - Predikce dat
+        - na základě natrénovaného modelu se predikovala hodnota dalšího kroku, znali jsme li krok aktuální (krokem se myslí hodnota a a x)
+
+Výsledkem jsou dva grafy, jeden pro klasický výpočet logistické mapy a druhý pro predikci dat na natrénovaném modelu.
+V obou případěch můžeme vidět, že okolo hodnoty a=3.5 se začnou hodnoty chaoticky "měnit" - deterministicky, ale na první pohled náhodně.
+
+<img src="https://github.com/user-attachments/assets/73f5b10a-a4bc-4fe2-924a-ee86cebe0535" width="400" height="300" />
+<img src="https://github.com/user-attachments/assets/c85eda4e-0d91-4b04-bc1d-fa011325741a" width="400" height="300" />
+
 Task 12 - Cellular automata
 -----------------------------------------
