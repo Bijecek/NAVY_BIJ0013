@@ -4,6 +4,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 from task_1 import Perceptron
+from task_10 import TheoryOfChaos
+from task_12 import ForestFire
 from task_2 import MultiLayerPerceptron
 from task_3 import HopfieldNetwork
 from task_4 import QLearning
@@ -36,6 +38,10 @@ def choose_task():
                 run_task_8()
             case "9":
                 run_task_9()
+            case "10":
+                run_task_10()
+            case "12":
+                run_task_12()
             case _:
                 print("Invalid choice")
         choice = input("Type \"q\" to quit or Choose a task (number): ")
@@ -185,8 +191,18 @@ def run_task_9():
 
     country_gen.show_result()
 
+def run_task_10():
+    theory_of_chaos = TheoryOfChaos(0,4.0,1000)
+    theory_of_chaos.compute()
+    theory_of_chaos.print_results()
+
+    theory_of_chaos.train_model()
+    theory_of_chaos.plot_results()
 
 
+def run_task_12():
+    forest_fire = ForestFire()
+    forest_fire.run_simulation()
 
 if __name__ == "__main__":
     choose_task()
