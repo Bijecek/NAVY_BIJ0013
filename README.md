@@ -313,3 +313,26 @@ V obou případěch můžeme vidět, že okolo hodnoty a=3.5 se začnou hodnoty 
 
 Task 12 - Cellular automata
 -----------------------------------------
+
+Cílem bylo simulovat šíření požáru v lese pomocí jednoduchého buněčného automatu podle zadaných pravidel.
+Celkem zde byly 3 stavy - prázdné místo | strom | hořící strom.
+
+- Workflow:
+    - Inicializace mřížky
+        - vytvoří se čtvercová mřížka size x size
+            - každá buňka je buď prázdná nebo strom (s pravděpodobností p_tree = 0.6)
+        - inicializují se také hodnoty **p** a **f**
+            - **p** určuje pravděpodobnost, že hořící strom nebo prázdné místo bude nahrazeno za živý strom
+            - **f** určuje pravděpodobnost, že strom sám od sebe začne hořet
+    - Jednotlové generace
+        - pokud alespoň jeden soused (v osmi směrech) hoří, buňka se změní na hořící
+        - jinak má pravděpodobnost **f** "samovznícení"
+    - Animace
+        - vykreslí se 100 generací, které simulují požár
+            - bílou barvou je reprezentováno prázdné místo, zelenou strom a červenou oheň
+        - animace se prvně vykreslí a následně se uloží do .gif souboru
+      
+Výsledkem je tedy jakási simulace požáru za předem daných podmínek. Tyto podmínky jsou velmi citlivé na hyperparametry, jalikož například změna **p** o jeden řád ať už směrem nahoru nebo dolů velmi ovlivní průběh regenerace zeleně a šíření požáru.
+
+![simulation](https://github.com/user-attachments/assets/340b4ddf-9bbc-4174-bdb6-5186ad0455b7)
+
