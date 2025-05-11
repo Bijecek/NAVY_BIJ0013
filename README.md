@@ -212,8 +212,79 @@ Cílem bylo vytvořit 3D fraktály pomocí IFS s využitím náhodně aplikovan�
 
 Task 8 - TEA - Mandelbrot set or Julia's set
 -----------------------------------------
+
+Pro tento úkol jsem si vybral Julia's set
+- Workflow:
+    - Inicializace
+        - nastaví se konstanta, obory hodnot pro reálnou a imaginární část
+        - nastaví se také parametr size, který ovlivňuje kolik hodnot budeme v jednotlivých prostorech generovat
+        - nastaví se taky počet iterací
+
+    - Výpočet Julia's set
+        - jako první se vytvoří dvě matice, k tomu slouží obory hodnot a parametr size
+            - matice pro reálná čísla a matice pro imaginární čísla
+            - tyto matice obsahují rovnoměrně rozmístěná čísla v daných intervalech
+        - z těchto matic se vytvoří "mřížka", abychom měli jejich kombinace
+        - následuje vytvoření komplexního čísla
+            - to se skládá z reálné a imaginární složky
+            - v kódu je to zapsáno takhle:  **complex_numbers = real_grid + 1j * imaginary_grid**
+        - hlavní iterační smyčka
+            - v každé iteraci se vytváří maska, která ověří podmínku, že komplexní číslo je <= 2 (viz. zadání úkolu)
+            - následně proběhne aktualizace výsledkové matice na daných pozicích čísel, která splnila podmínku
+            - poté se aktualizují samotná komplexní čísla (ty, která splnila podmínku)
+
+    - Vizualizace
+ 
+ Ve výsledných vizualizacích můžeme vidět dva obrazce. První z nich byl generován za pomocí konstanty **(-0.75, 0.10)**, druhý z nich pomocí **(-0.1, 0.65)**. Obě vizualizace byly vytvořeny v 300 iteracích. Obě tyto konstanty jsem si vybral náhodně - zkoušel jsem různé a tyto se mi líbily nejvíce.
+
+
+Výsledkem jsou tedy velmi zajímavé obrazce, generované pomocí "předpisu" Julia's setu (je to vlastně pouze nastavení oboru hodnot reálné a imaginární části). I přes to, že jsou tyto obrazce vizuálně poměrně složité, jsou vcelku jednoduché na generování.
+
+<img src="https://github.com/user-attachments/assets/1a93ab9d-264c-472c-aa01-2611277d6566" width="400" height="300" />
+<img src="https://github.com/user-attachments/assets/e99ab52c-02aa-4bc7-893c-429e6b61657a" width="400" height="300"/>
+
+
+
 Task 9 - Generation of 2D country using fractal geometry
 -----------------------------------------
+
+Cílem tohoto úkolu bylo vytvořit "krajinu", pomocí fraktální geometrie. Přesněji pomocí spatial subdivision - postupu popsaném v zadání.
+
+- Workflow:
+    - Inicializace
+        - jako první se nastaví startovní a konečná pozice inicializační úsečky
+        - nastaví se taktéž offset (určuje minimální a maximální posun na ose Y)
+        - následně se nastaví počet iterací (čím více iterací, tím daná křivka obsahuje více nerovností)
+        - jako poslední se vybere barva vykreslení 
+
+    - Generování části krajiny
+        - hlavní iterační smyčka
+            - v každé iteraci procházíme všechny záznamy v poli **lines** (jsou zde uložené vždy aktuální úsečky - tzn. pouze úsečky z předchozí iterace)
+            - pro každý záznam v tomto poli **( x_start, y_start, x_end, y_end )** najdeme prostředek úsečky
+            - následuje rozhodnutí, zdali generujeme pod nebo nad aktuální úsečku (k tomu slouží právě proměnná offset)
+                - prostředek úsečky na ose Y se o tento posun aktualizuje
+            - výsledkem je tedy bod, který je svou X souřadnicí uprostřed dané úsečky, nicméně jeho Y souřadnice je někde v rozsahu <-offset; offset>
+            - tento bod se spojí s původními startovními a následně i s konečnými body => uložení pro další iterace
+            - po průchodu všemi aktuálními úsečkami nastává nová iterace, ve která se prochází všechny úsečky uložené v minulé iteraci ( neboli příkaz: **lines = new_lines** na konci iterace)
+            - v další iteraci se tedy bude generovat z již přetvořených úseček
+    - Poslední iterace
+        - vždy nás zajímá pouze poslední iterace == hotový produkt
+        - pokud se tedy nacházíme v poslední iteraci, ukládáme si X a Y hodnoty pro následné vykreslení prostoru pod křivkou
+        - tyto hodnoty jsou následně použity pro funkci plt.fill_between(), která obarví prostor pod křivkou do Y hodnoty -500 s barvou, která je aktuálně nastavená
+
+    - Vizualizace
+        - vizualizační okno je omezeno na Y hodnoty z intervalu <-500; 500>
+        - jsou vypnuty ukazatele osy X a Y 
+ 
+Výsledkem je generovaná krajina, pomocí fraktální geometrie. Celkem tedy proběhly 3 volání funkce, v prvním volání se generovala zelená krajina, ve druhém krajina šedá a naposledy krajina modrá.
+
+Inicializační parametry jednotlivých částí krajin jsou popsány na obrázku níže.
+
+![image](https://github.com/user-attachments/assets/1b315f56-ef4c-45e2-824e-7e7640cd8dc9)
+
+![image](https://github.com/user-attachments/assets/a091ab2a-0576-47e0-b9e6-8acfe1735494)
+
+
 Task 10 - Theory of chaos: Logistic map, chaotic numbers and their prediction
 -----------------------------------------
 Task 12 - Cellular automata
